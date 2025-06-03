@@ -44,7 +44,7 @@ const Sidebar = () => {
     fetchMeals();
   }, [selectedCategory]);
 
-  const handleCategoryClick = (categoryName) => {
+  const handleCategoryClick = (categoryName:any) => {
     setSelectedCategory(categoryName);
   };
 
@@ -53,7 +53,7 @@ const Sidebar = () => {
       <div className="w-64 bg-gray-800 text-white p-6">
         <h2 className="text-2xl font-semibold mb-8">Meal Categories</h2>
         <ul className="space-y-4">
-          {categories.map((category) => (
+          {categories.map((category:any) => (
             <li key={category.idCategory}>
               <div
                 onClick={() => handleCategoryClick(category.strCategory)}
@@ -73,7 +73,7 @@ const Sidebar = () => {
       <div className="flex-1 p-6 bg-gray-100 overflow-y-auto">
         {meals.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {meals.map((meal) => (
+            {meals.map((meal:any) => (
               <Link to={`/Detail/${meal.idMeal}`} key={meal.idMeal}> 
                 <div className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105">
                   <img

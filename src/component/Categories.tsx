@@ -34,7 +34,7 @@ const Categories = () => {
   return (
     <div className="p-7">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {data.map((item) => (
+        {data.map((item:any) => (
           <div
             key={item.idCategory}
             className="max-w-sm mx-auto bg-white rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out flex flex-col h-full transform hover:cursor-pointer"

@@ -1,14 +1,24 @@
+// 
+
+
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+interface Meal {
+  strMeal: string;
+  strArea: string;
+  strMealThumb: string;
+  strInstructions: string;
+  [key: string]: any; // for strIngredient1, strMeasure1, etc.
+}
+
 const Detail = () => {
-  const { mealid } = useParams(); 
-  const [mealData, setMealData] = useState("");
+  const { mealid } = useParams();
+  const [mealData, setMealData] = useState<Meal | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-     
+
   useEffect(() => {
-    console.log("", mealid);  
     const fetchMealData = async () => {
       try {
         setLoading(true);
@@ -16,8 +26,6 @@ const Detail = () => {
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealid}`
         );
         const data = await response.json();
-        console.log("API Data:", data);
-
         if (data.meals) {
           setMealData(data.meals[0]);
         } else {
@@ -35,6 +43,7 @@ const Detail = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
+  if (!mealData) return <div>No data available.</div>;
 
   return (
     <div className="bg-white">
@@ -54,8 +63,6 @@ const Detail = () => {
           </div>
 
           <div className="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
-            <h2 className="sr-only">Images</h2>
-
             <div className="grid ">
               <img
                 src={mealData.strMealThumb}
@@ -68,11 +75,11 @@ const Detail = () => {
           <div className="mt-8 lg:col-span-5">
             <div className="mt">
               <h2 className="text-sm font-medium text-gray-900">Description</h2>
-
               <div className="mt-4 space-y-2 text-sm text-gray-500">
                 <p>{mealData.strInstructions}</p>
               </div>
             </div>
+
             <div className="mt-8 border-t border-gray-200 pt-8">
               <h2 className="text-sm font-medium text-gray-900">Ingredients</h2>
 
