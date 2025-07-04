@@ -147,7 +147,7 @@ const Sidebar = () => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      {/* Sidebar for desktop and collapsible menu for mobile */}
+      {/* Sidebar */}
       <div className="md:w-64 bg-gray-800 text-white p-4 md:p-6 flex-shrink-0">
         {/* Mobile Toggle Button */}
         <div className="md:hidden mb-4">
@@ -164,9 +164,9 @@ const Sidebar = () => {
           <h2 className="text-2xl font-semibold mb-4 md:mb-8">Meal Categories</h2>
           <ul className="space-y-2 md:space-y-4">
             {categories.map((category: any) => (
-            <li key={category.idCategory}>
-              <div
-                onClick={() => handleCategoryClick(category.strCategory)}
+              <li key={category.idCategory}>
+                <div
+                  onClick={() => handleCategoryClick(category.strCategory)}
                   className={`text-base cursor-pointer py-1 px-2 rounded-md transition duration-200
                     ${selectedCategory === category.strCategory
                     ? 'text-orange-500 font-semibold'
@@ -189,12 +189,18 @@ const Sidebar = () => {
               <Link to={`/Detail/${meal.idMeal}`} key={meal.idMeal}> 
                 <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-transform duration-300 transform hover:scale-105 flex flex-col h-full overflow-hidden">
                   <div className="w-full h-[200px] sm:h-[250px] overflow-hidden">
-                  <img
-                    src={meal.strMealThumb}
-                    alt={meal.strMeal}
-                    className="w-full h-[300px] object-cover rounded-md mb-4"
-                   />
-                    <h3 className="text-xl font-semibold text-center text-gray-800">{meal.strMeal}</h3>
+                    <img
+                      src={meal.strMealThumb}
+                      alt={meal.strMeal}
+                      className="w-full h-full object-cover"
+                      onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/250')}
+                    />
+                  </div>
+                  <div className="flex items-center justify-center p-4">
+                    <h3 className="text-xl font-semibold text-center text-gray-800">
+                      {meal.strMeal}
+                    </h3>
+                  </div>
                 </div>
               </Link>
             ))}
